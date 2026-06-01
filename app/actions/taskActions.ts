@@ -1,0 +1,72 @@
+"use server";
+
+import connectToDatabase from "@/lib/mongodb";
+import { Task } from "@/lib/models/Task";
+import { revalidatePath } from "next/cache";
+
+/**
+ * Obtener todas las tareas de la base de datos
+ */
+export async function getTasks() {
+  try {
+    await connectToDatabase();
+    // Fetch all tasks, sorted by urgency and then by creation date
+    const tasks = await Task.find({}).sort({ isUrgent: -1, createdAt: -1 }).lean();
+    
+    // We need to stringify IDs because plain objects are required in Server Components
+    return JSON.parse(JSON.stringify(tasks));
+  } catch (error) {
+    console.error("Error fetching tasks:", error);
+    return [];
+  }
+}
+
+/**
+ * Alternar el estado de completado de una tarea
+ */
+export async function toggleTaskCompletion(taskId: string, isCompleted: boolean) {
+  try {
+    await connectToDatabase();
+    await Task.findByIdAndUpdate(taskId, { isCompleted });
+    
+    // Revalidate the dashboard page so it shows the new state
+    revalidatePath("/");
+    return { success: true };
+  } catch (error) {
+    console.error("Error toggling task:", error);
+    return { success: false, error: "Failed to toggle task" };
+  }
+}
+
+/**
+ * Crear una nueva tarea de prueba (Seed)
+ */
+export async function createTestTasks() {
+  try {
+    await connectToDatabase();
+    
+    const count = await Task.countDocuments();
+    if (count === 0) {
+      await Task.create([
+        {
+          title: "Revisión de Presupuesto Q3",
+          description: "Aprobar las partidas finales con el equipo de finanzas antes de la junta directiva.",
+          isUrgent: true,
+          dueDate: new Date(new Date().setHours(10, 0, 0, 0)),
+        },
+        {
+          title: "Feedback Diseño UI",
+          description: "Enviar comentarios sobre los nuevos componentes compartidos al equipo de desarrollo.",
+          isUrgent: false,
+          dueDate: new Date(new Date().setHours(14, 30, 0, 0)),
+        }
+      ]);
+      revalidatePath("/");
+      return { success: true, message: "Tareas de prueba creadas." };
+    }
+    return { success: true, message: "Ya existen tareas." };
+  } catch (error) {
+    console.error("Error creating test tasks:", error);
+    return { success: false, error: "Failed to seed tasks" };
+  }
+}

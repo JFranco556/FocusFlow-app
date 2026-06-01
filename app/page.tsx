@@ -1,10 +1,25 @@
-export default function Home() {
+import { getTasks, createTestTasks } from "./actions/taskActions";
+import TaskCard from "@/components/TaskCard";
+
+export default async function Home() {
+  // Asegurarnos de tener al menos las tareas de prueba la primera vez
+  await createTestTasks();
+  
+  // Cargar las tareas desde MongoDB
+  const tasks = await getTasks();
+  const pendingTasks = tasks.filter((t: any) => !t.isCompleted);
+  const urgentCount = pendingTasks.filter((t: any) => t.isUrgent).length;
+
   return (
     <main className="w-full max-w-[768px] mx-auto px-margin-mobile pt-lg pb-xl space-y-xl">
       {/* Greeting */}
       <section className="space-y-xs">
-        <h2 className="font-display-lg text-display-lg text-on-surface">Hola, Alex</h2>
-        <p className="font-body-lg text-body-lg text-on-surface-variant">Tienes 3 tareas urgentes para hoy.</p>
+        <h2 className="font-display-lg text-display-lg text-on-surface">Hola, Franco</h2>
+        <p className="font-body-lg text-body-lg text-on-surface-variant">
+          {urgentCount > 0 
+            ? `Tienes ${urgentCount} tarea${urgentCount > 1 ? "s" : ""} urgente${urgentCount > 1 ? "s" : ""} para hoy.` 
+            : "No tienes tareas urgentes para hoy."}
+        </p>
       </section>
 
       {/* FlowAI Banner */}
@@ -29,39 +44,21 @@ export default function Home() {
           <button className="font-label-md text-label-md text-secondary hover:opacity-80 transition-opacity">Ver todas</button>
         </div>
         <div className="space-y-sm">
-          {/* Task Card 1 (Urgent) */}
-          <div className="bg-[#131b2e] rounded-lg p-md flex gap-md items-start shadow-[0px_4px_12px_rgba(15,23,42,0.04)] border-l-4 border-l-urgent-red relative overflow-hidden group">
-            <div className="absolute inset-0 bg-gradient-to-r from-urgent-red/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
-            <button className="mt-1 w-5 h-5 rounded-sm border border-outline-variant flex items-center justify-center text-transparent hover:border-secondary hover:text-secondary transition-colors shrink-0">
-              <span className="material-symbols-outlined text-[16px]">check</span>
-            </button>
-            <div className="flex-1">
-              <div className="flex justify-between items-start mb-1">
-                <h4 className="font-label-md text-label-md text-on-surface">Revisión de Presupuesto Q3</h4>
-                <span className="font-label-sm text-label-sm text-urgent-red flex items-center gap-1">
-                  <span className="material-symbols-outlined text-[14px]">schedule</span> 10:00 AM
-                </span>
-              </div>
-              <p className="font-body-md text-body-md text-on-surface-variant">Aprobar las partidas finales con el equipo de finanzas antes de la junta directiva.</p>
-            </div>
-          </div>
-
-          {/* Task Card 2 */}
-          <div className="bg-[#131b2e] rounded-lg p-md flex gap-md items-start shadow-[0px_4px_12px_rgba(15,23,42,0.04)] border-l-4 border-l-secondary relative overflow-hidden group">
-            <div className="absolute inset-0 bg-gradient-to-r from-secondary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
-            <button className="mt-1 w-5 h-5 rounded-sm border border-outline-variant flex items-center justify-center text-transparent hover:border-secondary hover:text-secondary transition-colors shrink-0">
-              <span className="material-symbols-outlined text-[16px]">check</span>
-            </button>
-            <div className="flex-1">
-              <div className="flex justify-between items-start mb-1">
-                <h4 className="font-label-md text-label-md text-on-surface">Feedback Diseño UI</h4>
-                <span className="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
-                  <span className="material-symbols-outlined text-[14px]">schedule</span> 02:30 PM
-                </span>
-              </div>
-              <p className="font-body-md text-body-md text-on-surface-variant">Enviar comentarios sobre los nuevos componentes compartidos al equipo de desarrollo.</p>
-            </div>
-          </div>
+          {tasks.length > 0 ? (
+            tasks.map((task: any) => (
+              <TaskCard 
+                key={task._id}
+                id={task._id}
+                title={task.title}
+                description={task.description}
+                isCompleted={task.isCompleted}
+                isUrgent={task.isUrgent}
+                dueDate={task.dueDate}
+              />
+            ))
+          ) : (
+            <p className="text-on-surface-variant">No tienes tareas pendientes.</p>
+          )}
         </div>
       </section>
 
