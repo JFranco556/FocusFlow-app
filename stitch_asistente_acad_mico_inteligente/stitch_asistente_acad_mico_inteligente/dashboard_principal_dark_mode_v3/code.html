@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dashboard Principal - FocusFlow</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-container": "#ee3a59",
+                        "inverse-on-surface": "#213145",
+                        "on-secondary-container": "#00302b",
+                        "surface-bright": "#2a3a4f",
+                        "on-error": "#690005",
+                        "error": "#ffb4ab",
+                        "on-tertiary-fixed": "#40000d",
+                        "tertiary-fixed": "#ffdadb",
+                        "tertiary-fixed-dim": "#ffb2b7",
+                        "background": "#031427",
+                        "urgent-red": "#f23d5c",
+                        "surface-tint": "#bec6e0",
+                        "on-primary": "#283044",
+                        "surface-container": "#102034",
+                        "primary-fixed": "#dae2fd",
+                        "secondary-fixed": "#89f5e7",
+                        "tertiary-container": "#39000b",
+                        "secondary-fixed-dim": "#6bd8cb",
+                        "surface-container-high": "#1b2b3f",
+                        "outline-variant": "#45464d",
+                        "on-background": "#d3e4fe",
+                        "on-primary-container": "#798098",
+                        "primary-container": "#0f172a",
+                        "error-container": "#93000a",
+                        "on-error-container": "#ffdad6",
+                        "primary-fixed-dim": "#bec6e0",
+                        "secondary-container": "#29a195",
+                        "surface-container-lowest": "#000f21",
+                        "outline": "#909097",
+                        "inverse-surface": "#d3e4fe",
+                        "on-tertiary": "#67001b",
+                        "surface-deep": "#213145",
+                        "ai-surface": "#86f2e4",
+                        "user-container": "#131b2e",
+                        "tertiary": "#ffb2b7",
+                        "on-secondary-fixed-variant": "#005049",
+                        "primary": "#bec6e0",
+                        "on-surface": "#d3e4fe",
+                        "surface-container-highest": "#26364a",
+                        "surface-dim": "#031427",
+                        "on-secondary-fixed": "#00201d",
+                        "surface-variant": "#26364a",
+                        "on-primary-fixed": "#131b2e",
+                        "on-secondary": "#003732",
+                        "surface-container-low": "#0b1c30",
+                        "on-tertiary-fixed-variant": "#920029",
+                        "inverse-primary": "#565e74",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "secondary": "#6bd8cb",
+                        "surface": "#031427",
+                        "on-surface-variant": "#c6c6cd"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "xl": "32px",
+                        "xs": "4px",
+                        "md": "16px",
+                        "sm": "8px",
+                        "margin-mobile": "20px",
+                        "gutter-mobile": "12px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-md-mobile": ["Inter"],
+                        "display-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                        "label-sm": ["11px", { "lineHeight": "14px", "fontWeight": "500" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-md-mobile": ["22px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "display-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #0b1326; /* Custom background as requested */
+            color: #d3e4fe;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-[#0b1326] text-on-surface font-body-md min-h-screen pb-[80px]">
+<!-- TopAppBar -->
+<header class="sticky top-0 w-full z-50 bg-surface/80 dark:bg-surface/80 backdrop-blur-md shadow-[0px_4px_12px_rgba(15,23,42,0.04)] bg-surface dark:bg-surface">
+<div class="flex items-center justify-between px-margin-mobile h-14 w-full max-w-[768px] mx-auto">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-surface-variant overflow-hidden flex items-center justify-center">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A close-up, high-quality portrait of a professional individual in a modern, dark-mode inspired corporate setting. The lighting is composed and unobtrusive, highlighting the subject's calm and intelligent expression. The overall aesthetic perfectly matches the minimalist, high-performance UI of the FocusFlow application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7MWmU6S4DS8dqyDSpaahs3qDwuB7uwMXGGtQtKqxC7pcdF901cuTq62eMnYrHaECG_We8J07f2fnSYIBCEk6QqOfy0KMtEHsrnlXZyYKWxESyJ54OS9vgSbwC8Qr93vGyFvfC9uNgfgY4vhKPxswY7bZZZURnccWb3oSnEP6MZ27sbeNP-T7BBxrO4-4x5dO1uswMvZhTKTLMLi_avLOMOodfdqlD2MEkaoWvpzVnFc9V0sQnk5FGRkOoyow0kyW83F04LCy3_iDz"/>
+</div>
+<h1 class="font-headline-md-mobile text-headline-md-mobile font-bold text-on-surface dark:text-on-surface">FocusFlow</h1>
+</div>
+<button class="w-10 h-10 rounded-full flex items-center justify-center bg-surface-variant text-on-surface-variant hover:opacity-80 transition-opacity active:scale-95 transition-transform">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="w-full max-w-[768px] mx-auto px-margin-mobile pt-lg pb-xl space-y-xl">
+<!-- Greeting -->
+<section class="space-y-xs">
+<h2 class="font-display-lg text-display-lg text-on-surface">Hola, Alex</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Tienes 3 tareas urgentes para hoy.</p>
+</section>
+<!-- FlowAI Banner -->
+<section class="relative overflow-hidden rounded-xl bg-gradient-to-br from-primary-container to-surface-container-high p-md border border-outline-variant/30 shadow-[0px_4px_12px_rgba(15,23,42,0.04)] flex items-center justify-between cursor-pointer hover:opacity-90 transition-opacity active:scale-[0.98]">
+<div class="absolute -right-10 -top-10 w-32 h-32 bg-secondary/10 rounded-full blur-2xl"></div>
+<div class="flex items-center gap-md z-10">
+<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-weight="fill">robot_2</span>
+</div>
+<div>
+<h3 class="font-label-md text-label-md text-on-surface">Pregúntale a FlowAI</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Planifiquemos tu día de forma inteligente.</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-secondary z-10">arrow_forward</span>
+</section>
+<!-- Prioridades de Hoy -->
+<section class="space-y-md">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-md-mobile text-headline-md-mobile text-on-surface">Prioridades de Hoy</h3>
+<button class="font-label-md text-label-md text-secondary hover:opacity-80 transition-opacity">Ver todas</button>
+</div>
+<div class="space-y-sm">
+<!-- Task Card 1 (Urgent) -->
+<div class="bg-[#131b2e] rounded-lg p-md flex gap-md items-start shadow-[0px_4px_12px_rgba(15,23,42,0.04)] border-l-4 border-l-urgent-red relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-r from-urgent-red/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+<button class="mt-1 w-5 h-5 rounded-sm border border-outline-variant flex items-center justify-center text-transparent hover:border-secondary hover:text-secondary transition-colors shrink-0">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</button>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-label-md text-label-md text-on-surface">Revisión de Presupuesto Q3</h4>
+<span class="font-label-sm text-label-sm text-urgent-red flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 10:00 AM
+                            </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Aprobar las partidas finales con el equipo de finanzas antes de la junta directiva.</p>
+</div>
+</div>
+<!-- Task Card 2 -->
+<div class="bg-[#131b2e] rounded-lg p-md flex gap-md items-start shadow-[0px_4px_12px_rgba(15,23,42,0.04)] border-l-4 border-l-secondary relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-r from-secondary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+<button class="mt-1 w-5 h-5 rounded-sm border border-outline-variant flex items-center justify-center text-transparent hover:border-secondary hover:text-secondary transition-colors shrink-0">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</button>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-label-md text-label-md text-on-surface">Feedback Diseño UI</h4>
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 02:30 PM
+                            </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Enviar comentarios sobre los nuevos componentes compartidos al equipo de desarrollo.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Próximos Vencimientos -->
+<section class="space-y-md">
+<h3 class="font-headline-md-mobile text-headline-md-mobile text-on-surface">Próximos Vencimientos</h3>
+<div class="flex gap-md overflow-x-auto hide-scrollbar pb-2 snap-x">
+<!-- Deadline Card 1 -->
+<div class="bg-[#131b2e] rounded-lg p-md min-w-[200px] shadow-[0px_4px_12px_rgba(15,23,42,0.04)] snap-start shrink-0 border border-outline-variant/20 flex flex-col justify-between h-28">
+<div class="flex items-center gap-sm text-secondary mb-2">
+<span class="material-symbols-outlined text-[18px]">campaign</span>
+<span class="font-label-sm text-label-sm">Marketing</span>
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-on-surface truncate">Campaña Q4</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Mañana</p>
+</div>
+</div>
+<!-- Deadline Card 2 -->
+<div class="bg-[#131b2e] rounded-lg p-md min-w-[200px] shadow-[0px_4px_12px_rgba(15,23,42,0.04)] snap-start shrink-0 border border-outline-variant/20 flex flex-col justify-between h-28">
+<div class="flex items-center gap-sm text-tertiary mb-2">
+<span class="material-symbols-outlined text-[18px]">code</span>
+<span class="font-label-sm text-label-sm">Desarrollo</span>
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-on-surface truncate">Lanzamiento v2.0</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Jue, 14 Nov</p>
+</div>
+</div>
+<!-- Deadline Card 3 -->
+<div class="bg-[#131b2e] rounded-lg p-md min-w-[200px] shadow-[0px_4px_12px_rgba(15,23,42,0.04)] snap-start shrink-0 border border-outline-variant/20 flex flex-col justify-between h-28">
+<div class="flex items-center gap-sm text-primary mb-2">
+<span class="material-symbols-outlined text-[18px]">groups</span>
+<span class="font-label-sm text-label-sm">RRHH</span>
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-on-surface truncate">Evaluaciones</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Vie, 15 Nov</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full h-[56px] z-50 bg-surface dark:bg-surface shadow-[0px_-2px_8px_rgba(0,0,0,0.05)] md:hidden">
+<div class="flex justify-around items-center w-full max-w-[768px] mx-auto px-margin-mobile h-full">
+<button class="flex flex-col items-center justify-center text-secondary dark:text-secondary relative after:content-[''] after:absolute after:-bottom-1 after:w-1 after:h-1 after:bg-secondary after:rounded-full hover:opacity-80 transition-opacity active:scale-90 transition-transform">
+<span class="material-symbols-outlined" data-weight="fill">dashboard</span>
+<span class="font-label-sm text-label-sm mt-1">Dashboard</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:text-secondary transition-colors active:scale-90 transition-transform">
+<span class="material-symbols-outlined">checklist</span>
+<span class="font-label-sm text-label-sm mt-1">Tareas</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:text-secondary transition-colors active:scale-90 transition-transform">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-label-sm text-label-sm mt-1">Calendario</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:text-secondary transition-colors active:scale-90 transition-transform">
+<span class="material-symbols-outlined">chat_bubble</span>
+<span class="font-label-sm text-label-sm mt-1">Chat</span>
+</button>
+</div>
+</nav>
+<script>
+        // Simple JS for interactive checkboxes
+        document.querySelectorAll('.border-outline-variant').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                // Prevent event bubbling if clicking inside a card
+                e.stopPropagation();
+                
+                const icon = this.querySelector('span');
+                const isChecked = !this.classList.contains('text-transparent');
+                
+                if (isChecked) {
+                    this.classList.add('text-transparent');
+                    this.classList.remove('bg-secondary', 'border-secondary', 'text-on-secondary');
+                    this.classList.add('border-outline-variant');
+                } else {
+                    this.classList.remove('text-transparent', 'border-outline-variant');
+                    this.classList.add('bg-secondary', 'border-secondary', 'text-on-secondary');
+                }
+            });
+        });
+    </script>
+</body></html>

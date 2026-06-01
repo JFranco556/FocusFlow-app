@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FocusFlow - Calendar &amp; Deadlines</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "surface-container-lowest": "#ffffff",
+                "tertiary-fixed": "#ffdadb",
+                "tertiary-container": "#40000d",
+                "tertiary": "#000000",
+                "secondary-container": "#86f2e4",
+                "on-primary": "#ffffff",
+                "on-tertiary-fixed-variant": "#92002a",
+                "on-surface": "#0b1c30",
+                "surface-container": "#e5eeff",
+                "on-error-container": "#93000a",
+                "on-primary-fixed-variant": "#3f465c",
+                "surface-variant": "#d3e4fe",
+                "surface": "#f8f9ff",
+                "primary": "#000000",
+                "on-tertiary-container": "#f23d5c",
+                "outline-variant": "#c6c6cd",
+                "on-tertiary-fixed": "#40000d",
+                "on-primary-fixed": "#131b2e",
+                "inverse-surface": "#213145",
+                "primary-fixed": "#dae2fd",
+                "on-secondary-fixed": "#00201d",
+                "primary-container": "#131b2e",
+                "error-container": "#ffdad6",
+                "on-background": "#0b1c30",
+                "secondary-fixed": "#89f5e7",
+                "surface-container-highest": "#d3e4fe",
+                "primary-fixed-dim": "#bec6e0",
+                "on-error": "#ffffff",
+                "on-secondary-container": "#006f66",
+                "outline": "#76777d",
+                "surface-container-high": "#dce9ff",
+                "surface-dim": "#cbdbf5",
+                "on-surface-variant": "#45464d",
+                "on-secondary": "#ffffff",
+                "background": "#f8f9ff",
+                "tertiary-fixed-dim": "#ffb2b7",
+                "surface-tint": "#565e74",
+                "surface-container-low": "#eff4ff",
+                "on-primary-container": "#7c839b",
+                "surface-bright": "#f8f9ff",
+                "secondary": "#006a61",
+                "inverse-on-surface": "#eaf1ff",
+                "error": "#ba1a1a",
+                "secondary-fixed-dim": "#6bd8cb",
+                "inverse-primary": "#bec6e0",
+                "on-tertiary": "#ffffff",
+                "on-secondary-fixed-variant": "#005049"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+        },
+        "spacing": {
+                "xs": "4px",
+                "xl": "32px",
+                "lg": "24px",
+                "gutter-mobile": "12px",
+                "base": "4px",
+                "sm": "8px",
+                "md": "16px",
+                "margin-mobile": "20px"
+        },
+        "fontFamily": {
+                "label-sm": [
+                        "Inter"
+                ],
+                "body-md": [
+                        "Inter"
+                ],
+                "headline-sm": [
+                        "Inter"
+                ],
+                "headline-md-mobile": [
+                        "Inter"
+                ],
+                "display-lg-mobile": [
+                        "Inter"
+                ],
+                "display-lg": [
+                        "Inter"
+                ],
+                "body-lg": [
+                        "Inter"
+                ],
+                "headline-md": [
+                        "Inter"
+                ],
+                "label-md": [
+                        "Inter"
+                ]
+        },
+        "fontSize": {
+                "label-sm": [
+                        "11px",
+                        {
+                                "lineHeight": "14px",
+                                "fontWeight": "500"
+                        }
+                ],
+                "body-md": [
+                        "14px",
+                        {
+                                "lineHeight": "20px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "headline-sm": [
+                        "20px",
+                        {
+                                "lineHeight": "28px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-md-mobile": [
+                        "22px",
+                        {
+                                "lineHeight": "28px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "display-lg-mobile": [
+                        "28px",
+                        {
+                                "lineHeight": "34px",
+                                "fontWeight": "700"
+                        }
+                ],
+                "display-lg": [
+                        "32px",
+                        {
+                                "lineHeight": "40px",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "body-lg": [
+                        "16px",
+                        {
+                                "lineHeight": "24px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "headline-md": [
+                        "24px",
+                        {
+                                "lineHeight": "32px",
+                                "letterSpacing": "-0.01em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "label-md": [
+                        "12px",
+                        {
+                                "lineHeight": "16px",
+                                "letterSpacing": "0.02em",
+                                "fontWeight": "600"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+</style>
+</head>
+<body class="bg-inverse-surface text-inverse-on-surface font-body-md antialiased min-h-screen flex flex-col pb-[56px] w-full md:max-w-md md:mx-auto md:border-x md:border-outline-variant/20 shadow-xl overflow-x-hidden">
+<!-- Shared Component: TopAppBar -->
+<header class="w-full top-0 sticky bg-inverse-surface flex justify-between items-center px-margin-mobile py-sm z-40">
+<!-- Leading Avatar -->
+<div class="w-8 h-8 rounded-full overflow-hidden bg-primary-container flex-shrink-0 cursor-pointer hover:opacity-80 transition-opacity">
+<img alt="User Avatar" class="w-full h-full object-cover" data-alt="Close-up portrait of a young professional woman with a calm, focused expression. The lighting is soft and high-key, creating a clean, modern aesthetic that aligns with a premium light-mode user interface. Background is completely neutral and out of focus." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDE4m-pLJD694CBAYMAigYWajcoLfgl0eoUC4khSbv_cTxM3EI9XAA52KXRBd6jvEfA3HGxvzdQZQPYNsRHbCgdoegjj4RuxFe8Z9f4mJ6puQJFTMeNj-mIJ4d34ym6vrWfzPWaxtnK3pRyafL1oAtlTyfi2J6he1-YFcXUvmCBNTzufwfoqNJdQWWd_lZ6d7k-iYfZyF4KOgKOUGoFscio5WRpFjHvvy5CLyN832Wxgsw486wEcjeAoRw4v8mukCpFwgG0tnTgyuA2"/>
+</div>
+<!-- Headline -->
+<h1 class="font-headline-md-mobile text-headline-md-mobile font-bold text-inverse-on-surface tracking-tight">FocusFlow</h1>
+<!-- Trailing Icon -->
+<button class="text-on-primary-container hover:bg-primary-container transition-colors active:scale-95 duration-200 w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[24px]">notifications</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col px-margin-mobile pt-sm pb-lg gap-lg">
+<!-- Calendar Section -->
+<section class="flex flex-col gap-sm">
+<!-- Calendar Header Navigation -->
+<div class="flex justify-between items-center w-full mb-1">
+<h2 class="font-headline-sm text-headline-sm text-inverse-on-surface font-semibold">November 2023</h2>
+<div class="flex gap-1">
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-on-primary-container hover:bg-primary-container transition-colors active:scale-95">
+<span class="material-symbols-outlined text-[20px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-on-primary-container hover:bg-primary-container transition-colors active:scale-95">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Calendar Grid Container (Bento Style Glassmorphism hint) -->
+<!-- View Toggle Control -->
+<div class="flex p-1 bg-primary-container rounded-lg mb-4 w-full self-center">
+<button class="flex-1 py-1.5 text-label-md font-bold rounded-md bg-inverse-surface text-secondary-fixed shadow-sm transition-all">
+    Mensual
+  </button>
+<button class="flex-1 py-1.5 text-label-md font-medium rounded-md text-on-primary-container hover:text-inverse-on-surface transition-all">
+    Semanal
+  </button>
+</div><div class="w-full bg-primary-container rounded-xl border border-outline-variant/30 shadow-[0px_4px_12px_rgba(0,0,0,0.2)] p-4 backdrop-blur-sm">
+<!-- Weekdays Header -->
+<div class="grid grid-cols-7 gap-1 mb-2 text-center">
+<div class="font-label-sm text-label-sm text-on-primary-container font-semibold">S</div>
+<div class="font-label-sm text-label-sm text-on-primary-container font-semibold">M</div>
+<div class="font-label-sm text-label-sm text-on-primary-container font-semibold">T</div>
+<div class="font-label-sm text-label-sm text-on-primary-container font-semibold">W</div>
+<div class="font-label-sm text-label-sm text-on-primary-container font-semibold">T</div>
+<div class="font-label-sm text-label-sm text-on-primary-container font-semibold">F</div>
+<div class="font-label-sm text-label-sm text-on-primary-container font-semibold">S</div>
+</div>
+<!-- Days Grid -->
+<div class="grid grid-cols-7 gap-y-2 gap-x-1 text-center">
+<!-- Offset for start of month (Wednesday start for Nov 2023) -->
+<div class="aspect-square"></div>
+<div class="aspect-square"></div>
+<div class="aspect-square"></div>
+<!-- Days -->
+<div class="aspect-square flex items-center justify-center relative cursor-pointer group">
+<div class="w-8 h-8 flex flex-col items-center justify-center rounded-full text-inverse-on-surface font-body-md text-body-md group-hover:bg-inverse-surface transition-colors">
+                            1
+                        </div>
+</div>
+<div class="aspect-square flex items-center justify-center relative cursor-pointer group">
+<div class="w-8 h-8 flex flex-col items-center justify-center rounded-full text-inverse-on-surface font-body-md text-body-md group-hover:bg-inverse-surface transition-colors">
+                            2
+                        </div>
+</div>
+<!-- Day with single normal deadline -->
+<div class="aspect-square flex items-center justify-center relative cursor-pointer group">
+<div class="w-8 h-8 flex flex-col items-center justify-center rounded-full text-inverse-on-surface font-body-md text-body-md group-hover:bg-inverse-surface transition-colors relative">
+                            3
+                            <div class="absolute bottom-[2px] flex gap-[2px]">
+<span class="w-[4px] h-[4px] rounded-full bg-secondary-fixed"></span>
+</div>
+</div>
+</div>
+<div class="aspect-square flex items-center justify-center relative cursor-pointer group">
+<div class="w-8 h-8 flex flex-col items-center justify-center rounded-full text-inverse-on-surface font-body-md text-body-md group-hover:bg-inverse-surface transition-colors">
+                            4
+                        </div>
+</div>
+<!-- Week 2 -->
+<div class="aspect-square flex items-center justify-center relative cursor-pointer group">
+<div class="w-8 h-8 flex flex-col items-center justify-center rounded-full text-inverse-on-surface font-body-md text-body-md group-hover:bg-inverse-surface transition-colors">5</div>
+</div>
+<div class="aspect-square flex items-center justify-center relative cursor-pointer group">
+<div class="w-8 h-8 flex flex-col items-center justify-center rounded-full text-inverse-on-surface font-body-md text-body-md group-hover:bg-inverse-surface transition-colors">6</div>
+</div>
+<div class="aspect-square flex items-center justify-center relative cursor-pointer group">
+<div class="w-8 h-8 flex flex-col items-center justify-center rounded-full text-inverse-on-surface font-body-md text-body-md group-hover:bg-inverse-surface transition-colors">7</div>
+</div>
+<div class="aspect-square flex items-center justify-center relative cursor-pointer group">
+<div class="w-8 h-8 flex flex-col items-center justify-center rounded-full text-inverse-on-surface font-body-md text-body-md group-hover:bg-inverse-surface transition-colors">8</div>
+</div>
+<!-- Day with urgent deadline -->
+<div class="aspect-square flex items-center justify-center relative cursor-pointer group">
+<div class="w-8 h-8 flex flex-col items-center justify-center rounded-full text-inverse-on-surface font-body-md text-body-md group-hover:bg-inverse-surface transition-colors relative">
+                            9
+                            <div class="absolute bottom-[2px] flex gap-[2px]">
+<span class="w-[4px] h-[4px] rounded-full bg-tertiary-fixed-dim"></span>
+</div>
+</div>
+</div>
+<div class="aspect-square flex items-center justify-center relative cursor-pointer group">
+<div class="w-8 h-8 flex flex-col items-center justify-center rounded-full text-inverse-on-surface font-body-md text-body-md group-hover:bg-inverse-surface transition-colors">10</div>
+</div>
+<div class="aspect-square flex items-center justify-center relative cursor-pointer group">
+<div class="w-8 h-8 flex flex-col items-center justify-center rounded-full text-inverse-on-surface font-body-md text-body-md group-hover:bg-inverse-surface transition-colors">11</div>
+</div>
+<!-- Week 3 -->
+<div class="aspect-square flex items-center justify-center relative cursor-pointer group">
+<div class="w-8 h-8 flex flex-col items-center justify-center rounded-full text-inverse-on-surface font-body-md text-body-md group-hover:bg-inverse-surface transition-colors">12</div>
+</div>
+<div class="aspect-square flex items-center justify-center relative cursor-pointer group">
+<div class="w-8 h-8 flex flex-col items-center justify-center rounded-full text-inverse-on-surface font-body-md text-body-md group-hover:bg-inverse-surface transition-colors">13</div>
+</div>
+<div class="aspect-square flex items-center justify-center relative cursor-pointer group">
+<div class="w-8 h-8 flex flex-col items-center justify-center rounded-full text-inverse-on-surface font-body-md text-body-md group-hover:bg-inverse-surface transition-colors">14</div>
+</div>
+<!-- CURRENT ACTIVE DAY -->
+<div class="aspect-square flex items-center justify-center relative cursor-pointer group">
+<div class="w-8 h-8 flex flex-col items-center justify-center rounded-full bg-secondary-fixed text-on-secondary-fixed shadow-md font-body-md text-body-md font-bold relative">
+                            15
+                        </div>
+</div>
+<div class="aspect-square flex items-center justify-center relative cursor-pointer group">
+<div class="w-8 h-8 flex flex-col items-center justify-center rounded-full text-inverse-on-surface font-body-md text-body-md group-hover:bg-inverse-surface transition-colors">16</div>
+</div>
+<!-- Day with multiple deadlines (Urgent + Normal) -->
+<div class="aspect-square flex items-center justify-center relative cursor-pointer group">
+<div class="w-8 h-8 flex flex-col items-center justify-center rounded-full text-inverse-on-surface font-body-md text-body-md group-hover:bg-inverse-surface transition-colors relative">
+                            17
+                            <div class="absolute bottom-[2px] flex gap-[2px]">
+<span class="w-[4px] h-[4px] rounded-full bg-tertiary-fixed-dim"></span>
+<span class="w-[4px] h-[4px] rounded-full bg-secondary-fixed"></span>
+</div>
+</div>
+</div>
+<div class="aspect-square flex items-center justify-center relative cursor-pointer group">
+<div class="w-8 h-8 flex flex-col items-center justify-center rounded-full text-inverse-on-surface font-body-md text-body-md group-hover:bg-inverse-surface transition-colors">18</div>
+</div>
+<!-- Week 4 (Simplified to save vertical space, representing rest of month) -->
+<div class="aspect-square flex items-center justify-center relative cursor-pointer group">
+<div class="w-8 h-8 flex flex-col items-center justify-center rounded-full text-inverse-on-surface font-body-md text-body-md group-hover:bg-inverse-surface transition-colors">19</div>
+</div>
+<div class="aspect-square flex items-center justify-center relative cursor-pointer group">
+<div class="w-8 h-8 flex flex-col items-center justify-center rounded-full text-inverse-on-surface font-body-md text-body-md group-hover:bg-inverse-surface transition-colors">20</div>
+</div>
+<div class="aspect-square flex items-center justify-center relative cursor-pointer group">
+<div class="w-8 h-8 flex flex-col items-center justify-center rounded-full text-inverse-on-surface font-body-md text-body-md group-hover:bg-inverse-surface transition-colors relative">
+                            21
+                             <div class="absolute bottom-[2px] flex gap-[2px]">
+<span class="w-[4px] h-[4px] rounded-full bg-secondary-fixed"></span>
+</div>
+</div>
+</div>
+<div class="aspect-square flex items-center justify-center relative cursor-pointer group">
+<div class="w-8 h-8 flex flex-col items-center justify-center rounded-full text-on-primary-container font-body-md text-body-md">...</div>
+</div>
+<div class="aspect-square flex items-center justify-center relative cursor-pointer group">
+<div class="w-8 h-8 flex flex-col items-center justify-center rounded-full text-on-primary-container font-body-md text-body-md">...</div>
+</div>
+<div class="aspect-square flex items-center justify-center relative cursor-pointer group">
+<div class="w-8 h-8 flex flex-col items-center justify-center rounded-full text-on-primary-container font-body-md text-body-md">...</div>
+</div>
+<div class="aspect-square flex items-center justify-center relative cursor-pointer group">
+<div class="w-8 h-8 flex flex-col items-center justify-center rounded-full text-on-primary-container font-body-md text-body-md">...</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Deadlines List Section -->
+<section class="flex flex-col gap-md flex-1">
+<div class="flex justify-between items-end pb-2 border-b border-outline-variant/20">
+<h3 class="font-headline-sm text-headline-sm text-inverse-on-surface font-semibold">Upcoming Assignments</h3>
+<button class="font-label-md text-label-md text-secondary-fixed hover:text-secondary-fixed-dim transition-colors">View All</button>
+</div>
+<!-- List Container -->
+<div class="flex flex-col gap-3">
+<!-- Urgent Card -->
+<article class="relative bg-primary-container rounded-xl border border-outline-variant/30 shadow-[0px_4px_12px_rgba(0,0,0,0.2)] p-md pl-5 flex flex-col gap-sm overflow-hidden hover:shadow-[0px_8px_24px_rgba(0,0,0,0.3)] transition-shadow cursor-pointer group">
+<!-- Priority Strip (Rose for Urgent) -->
+<div class="absolute left-0 top-0 bottom-0 w-[4px] bg-tertiary-fixed-dim"></div>
+<div class="flex justify-between items-start gap-4">
+<div class="flex-1">
+<h4 class="font-headline-sm text-headline-sm text-inverse-on-surface leading-tight transition-colors">Advanced Mathematics Final Project</h4>
+<p class="font-body-md text-body-md text-on-primary-container mt-1">Calculus III - Prof. Davis</p>
+</div>
+<!-- Countdown Chip (Urgent) -->
+<div class="bg-tertiary-container text-tertiary-fixed-dim px-2.5 py-1 rounded-full font-label-sm text-label-sm whitespace-nowrap flex-shrink-0 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+                            In 2 days
+                        </div>
+</div>
+<div class="flex items-center gap-2 mt-1 pt-3 border-t border-outline-variant/20">
+<span class="material-symbols-outlined text-[16px] text-on-primary-container">schedule</span>
+<span class="font-label-md text-label-md text-on-primary-container">Nov 17, 11:59 PM</span>
+</div>
+</article>
+<!-- Normal Priority Card -->
+<article class="relative bg-primary-container rounded-xl border border-outline-variant/30 shadow-[0px_4px_12px_rgba(0,0,0,0.2)] p-md pl-5 flex flex-col gap-sm overflow-hidden hover:shadow-[0px_8px_24px_rgba(0,0,0,0.3)] transition-shadow cursor-pointer group">
+<!-- Priority Strip (Teal for Normal) -->
+<div class="absolute left-0 top-0 bottom-0 w-[4px] bg-secondary-fixed"></div>
+<div class="flex justify-between items-start gap-4">
+<div class="flex-1">
+<h4 class="font-headline-sm text-headline-sm text-inverse-on-surface leading-tight transition-colors">Literature Essay Draft</h4>
+<p class="font-body-md text-body-md text-on-primary-container mt-1">Modernism 101 - Peer Review</p>
+</div>
+<!-- Countdown Chip (Normal) -->
+<div class="bg-secondary-container text-on-secondary-container px-2.5 py-1 rounded-full font-label-sm text-label-sm whitespace-nowrap flex-shrink-0">
+                            In 6 days
+                        </div>
+</div>
+<div class="flex items-center gap-2 mt-1 pt-3 border-t border-outline-variant/20">
+<span class="material-symbols-outlined text-[16px] text-on-primary-container">schedule</span>
+<span class="font-label-md text-label-md text-on-primary-container">Nov 21, 5:00 PM</span>
+</div>
+</article>
+<!-- Normal Priority Card 2 -->
+<article class="relative bg-primary-container rounded-xl border border-outline-variant/30 shadow-[0px_4px_12px_rgba(0,0,0,0.2)] p-md pl-5 flex flex-col gap-sm overflow-hidden hover:shadow-[0px_8px_24px_rgba(0,0,0,0.3)] transition-shadow cursor-pointer group opacity-70">
+<!-- Priority Strip (Teal for Normal) -->
+<div class="absolute left-0 top-0 bottom-0 w-[4px] bg-secondary-fixed"></div>
+<div class="flex justify-between items-start gap-4">
+<div class="flex-1">
+<h4 class="font-headline-sm text-headline-sm text-inverse-on-surface leading-tight transition-colors">Lab Report: Thermodynamics</h4>
+<p class="font-body-md text-body-md text-on-primary-container mt-1">Physics 204</p>
+</div>
+<!-- Countdown Chip (Far) -->
+<div class="bg-inverse-surface text-on-primary-container px-2.5 py-1 rounded-full font-label-sm text-label-sm whitespace-nowrap flex-shrink-0">
+                            In 14 days
+                        </div>
+</div>
+<div class="flex items-center gap-2 mt-1 pt-3 border-t border-outline-variant/20">
+<span class="material-symbols-outlined text-[16px] text-on-primary-container">schedule</span>
+<span class="font-label-md text-label-md text-on-primary-container">Nov 29, 8:00 AM</span>
+</div>
+</article>
+</div>
+</section>
+</main>
+<!-- Shared Component: BottomNavBar -->
+<!-- Active State Logic: The prompt asks for "Calendar and deadlines screen", so "Calendar" is the active tab -->
+<nav class="fixed bottom-0 w-full z-50 h-[56px] bg-primary-container border-t border-outline-variant/20 shadow-sm flex justify-around items-center px-margin-mobile pb-safe md:max-w-md md:left-1/2 md:-translate-x-1/2">
+<!-- Inactive: Dashboard -->
+<button class="flex flex-col items-center justify-center text-on-primary-container hover:bg-inverse-surface transition-all active:scale-90 duration-150 w-full h-full pt-1">
+<span class="material-symbols-outlined mb-0.5 text-[24px]">dashboard</span>
+<span class="font-label-sm text-[10px] font-medium">Dashboard</span>
+</button>
+<!-- Inactive: Tasks -->
+<button class="flex flex-col items-center justify-center text-on-primary-container hover:bg-inverse-surface transition-all active:scale-90 duration-150 w-full h-full pt-1">
+<span class="material-symbols-outlined mb-0.5 text-[24px]">assignment_turned_in</span>
+<span class="font-label-sm text-[10px] font-medium">Tasks</span>
+</button>
+<!-- ACTIVE: Calendar -->
+<button class="flex flex-col items-center justify-center text-secondary-fixed font-bold hover:bg-inverse-surface transition-all active:scale-90 duration-150 w-full h-full relative pt-1">
+<span class="material-symbols-outlined mb-0.5 text-[24px]" style="font-variation-settings: 'FILL' 1;">calendar_today</span>
+<span class="font-label-sm text-[10px] font-bold">Calendar</span>
+<!-- Active Dot Indicator -->
+<div class="absolute bottom-1 w-1 h-1 bg-secondary-fixed rounded-full"></div>
+</button>
+<!-- Inactive: Chat -->
+<button class="flex flex-col items-center justify-center text-on-primary-container hover:bg-inverse-surface transition-all active:scale-90 duration-150 w-full h-full pt-1">
+<span class="material-symbols-outlined mb-0.5 text-[24px]">smart_toy</span>
+<span class="font-label-sm text-[10px] font-medium">Chat</span>
+</button>
+</nav>
+</body></html>

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FocusFlow - Mis Tareas</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.filled {
+            font-variation-settings: 'FILL' 1;
+        }
+        /* Custom scrollbar for horizontal lists */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-container": "#ee3a59",
+                        "inverse-on-surface": "#213145",
+                        "on-secondary-container": "#00302b",
+                        "surface-bright": "#2a3a4f",
+                        "on-error": "#690005",
+                        "error": "#ffb4ab",
+                        "on-tertiary-fixed": "#40000d",
+                        "tertiary-fixed": "#ffdadb",
+                        "tertiary-fixed-dim": "#ffb2b7",
+                        "background": "#031427",
+                        "urgent-red": "#f23d5c",
+                        "surface-tint": "#bec6e0",
+                        "on-primary": "#283044",
+                        "surface-container": "#102034",
+                        "primary-fixed": "#dae2fd",
+                        "secondary-fixed": "#89f5e7",
+                        "tertiary-container": "#39000b",
+                        "secondary-fixed-dim": "#6bd8cb",
+                        "surface-container-high": "#1b2b3f",
+                        "outline-variant": "#45464d",
+                        "on-background": "#d3e4fe",
+                        "on-primary-container": "#798098",
+                        "primary-container": "#0f172a",
+                        "error-container": "#93000a",
+                        "on-error-container": "#ffdad6",
+                        "primary-fixed-dim": "#bec6e0",
+                        "secondary-container": "#29a195",
+                        "surface-container-lowest": "#000f21",
+                        "outline": "#909097",
+                        "inverse-surface": "#d3e4fe",
+                        "on-tertiary": "#67001b",
+                        "surface-deep": "#213145",
+                        "ai-surface": "#86f2e4",
+                        "user-container": "#131b2e",
+                        "tertiary": "#ffb2b7",
+                        "on-secondary-fixed-variant": "#005049",
+                        "primary": "#bec6e0",
+                        "on-surface": "#d3e4fe",
+                        "surface-container-highest": "#26364a",
+                        "surface-dim": "#031427",
+                        "on-secondary-fixed": "#00201d",
+                        "surface-variant": "#26364a",
+                        "on-primary-fixed": "#131b2e",
+                        "on-secondary": "#003732",
+                        "surface-container-low": "#0b1c30",
+                        "on-tertiary-fixed-variant": "#920029",
+                        "inverse-primary": "#565e74",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "secondary": "#6bd8cb",
+                        "surface": "#031427",
+                        "on-surface-variant": "#c6c6cd"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "xl": "32px",
+                        "xs": "4px",
+                        "md": "16px",
+                        "sm": "8px",
+                        "margin-mobile": "20px",
+                        "gutter-mobile": "12px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-md-mobile": ["Inter"],
+                        "display-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                        "label-sm": ["11px", { "lineHeight": "14px", "fontWeight": "500" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-md-mobile": ["22px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "display-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface-container-low text-on-background font-body-md min-h-screen flex flex-col selection:bg-secondary selection:text-on-secondary">
+<!-- TopAppBar -->
+<header class="bg-surface/80 dark:bg-surface/80 backdrop-blur-md sticky top-0 w-full z-50 bg-surface dark:bg-surface shadow-[0px_4px_12px_rgba(15,23,42,0.04)]">
+<div class="flex items-center justify-between px-margin-mobile h-14 w-full max-w-[768px] mx-auto">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center overflow-hidden border border-outline-variant">
+<span class="material-symbols-outlined text-primary text-[20px]">person</span>
+</div>
+<span class="font-headline-md-mobile text-headline-md-mobile font-bold text-on-surface dark:text-on-surface tracking-tight">FocusFlow</span>
+</div>
+<button class="w-10 h-10 rounded-full flex items-center justify-center hover:opacity-80 transition-opacity active:scale-95 transition-transform bg-surface-variant text-primary dark:text-primary-fixed-dim">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 w-full max-w-[768px] mx-auto pb-[80px] pt-md">
+<!-- Header -->
+<div class="px-margin-mobile mb-lg">
+<h1 class="font-display-lg text-display-lg text-on-surface">Tareas de Hoy</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs">Tienes 5 tareas pendientes para hoy.</p>
+</div>
+<!-- Filters (Scrollable) -->
+<div class="px-margin-mobile mb-lg overflow-x-auto no-scrollbar flex items-center gap-sm pb-1">
+<button class="px-md py-sm rounded-full bg-secondary text-on-secondary font-label-md text-label-md whitespace-nowrap active:scale-95 transition-transform">
+                Todas
+            </button>
+<button class="px-md py-sm rounded-full bg-surface-variant text-on-surface-variant font-label-md text-label-md whitespace-nowrap hover:bg-surface-container-high transition-colors active:scale-95">
+                Universidad
+            </button>
+<button class="px-md py-sm rounded-full bg-surface-variant text-on-surface-variant font-label-md text-label-md whitespace-nowrap hover:bg-surface-container-high transition-colors active:scale-95">
+                Trabajo
+            </button>
+<button class="px-md py-sm rounded-full bg-surface-variant text-on-surface-variant font-label-md text-label-md whitespace-nowrap hover:bg-surface-container-high transition-colors active:scale-95">
+                Personal
+            </button>
+</div>
+<!-- Group: Universidad -->
+<section class="mb-xl px-margin-mobile">
+<div class="flex items-center gap-sm mb-md">
+<span class="material-symbols-outlined text-secondary text-[20px]">school</span>
+<h2 class="font-headline-md-mobile text-headline-md-mobile text-on-surface">Universidad</h2>
+<span class="ml-auto font-label-sm text-label-sm text-on-surface-variant bg-surface-variant px-2 py-0.5 rounded-full">2</span>
+</div>
+<div class="flex flex-col gap-sm">
+<!-- Task Card 1 (Urgent) -->
+<div class="bg-user-container rounded-lg p-md relative flex gap-md items-start shadow-[0px_4px_12px_rgba(15,23,42,0.04)] border border-transparent hover:border-outline-variant/30 transition-colors cursor-pointer group">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-urgent-red rounded-l-lg"></div>
+<button class="mt-0.5 flex-shrink-0 w-5 h-5 rounded border border-outline text-transparent group-hover:border-secondary transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</button>
+<div class="flex-1 flex flex-col gap-xs">
+<h3 class="font-body-lg text-body-lg text-on-surface">Entrega Ensayo Historia</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Revisar citas APA y subir el PDF al portal antes de medianoche.</p>
+<div class="flex items-center gap-sm mt-sm">
+<span class="inline-flex items-center gap-xs font-label-sm text-label-sm text-urgent-red bg-error-container/20 px-2 py-1 rounded">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+                                Hoy, 23:59
+                            </span>
+<span class="inline-flex items-center gap-xs font-label-sm text-label-sm text-on-surface-variant bg-surface-variant px-2 py-1 rounded">
+<span class="material-symbols-outlined text-[14px]">flag</span>
+                                Alta
+                            </span>
+</div>
+</div>
+</div>
+<!-- Task Card 2 -->
+<div class="bg-user-container rounded-lg p-md relative flex gap-md items-start shadow-[0px_4px_12px_rgba(15,23,42,0.04)] border border-transparent hover:border-outline-variant/30 transition-colors cursor-pointer group">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-secondary rounded-l-lg"></div>
+<button class="mt-0.5 flex-shrink-0 w-5 h-5 rounded border border-outline text-transparent group-hover:border-secondary transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</button>
+<div class="flex-1 flex flex-col gap-xs">
+<h3 class="font-body-lg text-body-lg text-on-surface">Leer Capítulo 4 - Álgebra</h3>
+<div class="flex items-center gap-sm mt-sm">
+<span class="inline-flex items-center gap-xs font-label-sm text-label-sm text-on-surface-variant bg-surface-variant px-2 py-1 rounded">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+                                Mañana, 10:00
+                            </span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Group: Trabajo -->
+<section class="mb-xl px-margin-mobile">
+<div class="flex items-center gap-sm mb-md">
+<span class="material-symbols-outlined text-secondary text-[20px]">work</span>
+<h2 class="font-headline-md-mobile text-headline-md-mobile text-on-surface">Trabajo</h2>
+<span class="ml-auto font-label-sm text-label-sm text-on-surface-variant bg-surface-variant px-2 py-0.5 rounded-full">3</span>
+</div>
+<div class="flex flex-col gap-sm">
+<!-- Task Card 3 -->
+<div class="bg-user-container rounded-lg p-md relative flex gap-md items-start shadow-[0px_4px_12px_rgba(15,23,42,0.04)] border border-transparent hover:border-outline-variant/30 transition-colors cursor-pointer group">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary rounded-l-lg"></div>
+<button class="mt-0.5 flex-shrink-0 w-5 h-5 rounded border border-outline text-transparent group-hover:border-secondary transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</button>
+<div class="flex-1 flex flex-col gap-xs">
+<h3 class="font-body-lg text-body-lg text-on-surface">Reunión de Sincronización</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Preparar notas sobre el progreso del sprint actual.</p>
+<div class="flex items-center gap-sm mt-sm">
+<span class="inline-flex items-center gap-xs font-label-sm text-label-sm text-primary bg-primary-container px-2 py-1 rounded">
+<span class="material-symbols-outlined text-[14px]">videocam</span>
+                                14:30 - Meet
+                            </span>
+</div>
+</div>
+</div>
+<!-- Task Card 4 (Completed state preview) -->
+<div class="bg-user-container/50 rounded-lg p-md relative flex gap-md items-start shadow-[0px_4px_12px_rgba(15,23,42,0.04)] border border-transparent opacity-60">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-outline-variant rounded-l-lg"></div>
+<button class="mt-0.5 flex-shrink-0 w-5 h-5 rounded bg-secondary text-on-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</button>
+<div class="flex-1 flex flex-col gap-xs">
+<h3 class="font-body-lg text-body-lg text-on-surface-variant line-through">Enviar reporte semanal</h3>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="bg-surface dark:bg-surface fixed bottom-0 w-full h-[56px] z-50 shadow-[0px_-2px_8px_rgba(0,0,0,0.05)] md:hidden">
+<div class="flex justify-around items-center w-full max-w-[768px] mx-auto px-margin-mobile h-full">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:text-secondary transition-colors active:scale-90 transition-transform flex-1 h-full" href="#">
+<span class="material-symbols-outlined text-[24px] mb-1">dashboard</span>
+<span class="font-label-sm text-label-sm">Dashboard</span>
+</a>
+<!-- Active Navigation -->
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary relative after:content-[''] after:absolute after:-bottom-1 after:w-1 after:h-1 after:bg-secondary after:rounded-full hover:text-secondary transition-colors active:scale-90 transition-transform flex-1 h-full" href="#">
+<span class="material-symbols-outlined text-[24px] mb-1 filled">checklist</span>
+<span class="font-label-sm text-label-sm">Tareas</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:text-secondary transition-colors active:scale-90 transition-transform flex-1 h-full" href="#">
+<span class="material-symbols-outlined text-[24px] mb-1">calendar_month</span>
+<span class="font-label-sm text-label-sm">Calendario</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:text-secondary transition-colors active:scale-90 transition-transform flex-1 h-full" href="#">
+<span class="material-symbols-outlined text-[24px] mb-1">chat_bubble</span>
+<span class="font-label-sm text-label-sm">Chat</span>
+</a>
+</div>
+</nav>
+<!-- Floating Action Button (FAB) - Contextual for Tasks -->
+<button class="fixed bottom-[80px] right-margin-mobile w-14 h-14 bg-secondary text-on-secondary rounded-2xl shadow-lg flex items-center justify-center active:scale-90 transition-transform hover:opacity-90 z-40 md:hidden">
+<span class="material-symbols-outlined text-[24px]">add</span>
+</button>
+</body></html>
