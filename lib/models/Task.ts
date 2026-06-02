@@ -1,6 +1,7 @@
 import mongoose, { Schema, Document, Model } from "mongoose";
 
 export interface ITask extends Document {
+  userId: string;
   title: string;
   description?: string;
   isCompleted: boolean;
@@ -13,6 +14,7 @@ export interface ITask extends Document {
 
 const TaskSchema: Schema = new Schema(
   {
+    userId: { type: String, required: true, index: true },
     title: { type: String, required: true },
     description: { type: String },
     isCompleted: { type: Boolean, default: false },
