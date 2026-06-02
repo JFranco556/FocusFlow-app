@@ -98,3 +98,21 @@ export async function createTask(userId: string, data: { title: string, descript
     return { success: false, error: "Failed to create task" };
   }
 }
+
+/**
+ * Eliminar una tarea
+ */
+export async function deleteTask(taskId: string) {
+  try {
+    await connectToDatabase();
+    await Task.findByIdAndDelete(taskId);
+    
+    revalidatePath("/");
+    revalidatePath("/tasks");
+    revalidatePath("/schedule");
+    return { success: true };
+  } catch (error) {
+    console.error("Error deleting task:", error);
+    return { success: false, error: "Failed to delete task" };
+  }
+}

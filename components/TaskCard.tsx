@@ -1,7 +1,7 @@
 "use client";
 
 import { useTransition } from "react";
-import { toggleTaskCompletion } from "@/app/actions/taskActions";
+import { toggleTaskCompletion, deleteTask } from "@/app/actions/taskActions";
 
 interface TaskCardProps {
   id: string;
@@ -19,6 +19,14 @@ export default function TaskCard({ id, title, description, isCompleted, isUrgent
     startTransition(async () => {
       await toggleTaskCompletion(id, !isCompleted);
     });
+  };
+
+  const handleDelete = () => {
+    if (confirm("¿Estás seguro de querer borrar esta tarea?")) {
+      startTransition(async () => {
+        await deleteTask(id);
+      });
+    }
   };
 
   const formattedTime = dueDate
@@ -61,8 +69,20 @@ export default function TaskCard({ id, title, description, isCompleted, isUrgent
           )}
         </div>
         {description && (
-          <p className="font-body-md text-body-md text-on-surface-variant">{description}</p>
+          <p className="font-body-md text-body-md text-on-surface-variant mb-2">{description}</p>
         )}
+        
+        {/* Delete Button */}
+        <div className="flex justify-end mt-2">
+          <button 
+            onClick={handleDelete}
+            disabled={isPending}
+            className="text-on-surface-variant hover:text-urgent-red transition-colors p-1 flex items-center justify-center rounded-full hover:bg-urgent-red/10 active:scale-95"
+            title="Borrar Tarea"
+          >
+            <span className="material-symbols-outlined text-[18px]">delete</span>
+          </button>
+        </div>
       </div>
     </div>
   );

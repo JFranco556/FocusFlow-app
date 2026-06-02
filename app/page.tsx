@@ -53,8 +53,8 @@ export default async function Home() {
           <button className="font-label-md text-label-md text-secondary hover:opacity-80 transition-opacity">Ver todas</button>
         </div>
         <div className="space-y-sm">
-          {tasks.length > 0 ? (
-            tasks.map((task: any) => (
+          {pendingTasks.length > 0 ? (
+            pendingTasks.map((task: any) => (
               <TaskCard 
                 key={task._id}
                 id={task._id}
