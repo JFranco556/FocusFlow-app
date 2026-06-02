@@ -74,3 +74,27 @@ export async function createTestTasks(userId: string) {
     return { success: false, error: "Failed to seed tasks" };
   }
 }
+
+/**
+ * Crear una nueva tarea
+ */
+export async function createTask(userId: string, data: { title: string, description?: string, isUrgent: boolean, dueDate?: Date }) {
+  try {
+    await connectToDatabase();
+    await Task.create({
+      userId,
+      title: data.title,
+      description: data.description,
+      isUrgent: data.isUrgent,
+      dueDate: data.dueDate,
+    });
+    
+    revalidatePath("/");
+    revalidatePath("/tasks");
+    revalidatePath("/schedule");
+    return { success: true };
+  } catch (error) {
+    console.error("Error creating task:", error);
+    return { success: false, error: "Failed to create task" };
+  }
+}
