@@ -1,12 +1,21 @@
 import { getTasks, createTestTasks } from "./actions/taskActions";
 import TaskCard from "@/components/TaskCard";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { redirect } from "next/navigation";
 
 export default async function Home() {
+  const session = await getServerSession(authOptions);
+  if (!session || !session.user) {
+    redirect("/login");
+  }
+  const userId = (session.user as any).id || session.user.email;
+
   // Asegurarnos de tener al menos las tareas de prueba la primera vez
-  await createTestTasks();
+  await createTestTasks(userId);
   
   // Cargar las tareas desde MongoDB
-  const tasks = await getTasks();
+  const tasks = await getTasks(userId);
   const pendingTasks = tasks.filter((t: any) => !t.isCompleted);
   const urgentCount = pendingTasks.filter((t: any) => t.isUrgent).length;
 

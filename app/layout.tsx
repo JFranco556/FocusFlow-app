@@ -48,7 +48,7 @@ export default function RootLayout({
           {children}
 
           {/* BottomNavBar */}
-          <nav className="fixed bottom-0 w-full h-[56px] z-50 bg-surface shadow-[0px_-2px_8px_rgba(0,0,0,0.05)] md:hidden">
+          <nav className="fixed bottom-0 w-full h-[56px] z-50 bg-surface shadow-[0px_-2px_8px_rgba(0,0,0,0.05)]">
             <div className="flex justify-around items-center w-full max-w-[768px] mx-auto px-margin-mobile h-full">
               <Link href="/" className="flex flex-col items-center justify-center text-secondary relative hover:opacity-80 transition-opacity active:scale-90 transition-transform">
                 <span className="material-symbols-outlined" data-weight="fill">dashboard</span>

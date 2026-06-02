@@ -1,11 +1,12 @@
 import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import connectToDatabase from "@/lib/mongodb";
 import { Task } from "@/lib/models/Task";
 import { ScheduleItem } from "@/lib/models/ScheduleItem";
 
 export default async function SchedulePage() {
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
   
   // Si no hay sesión, el middleware lo debió bloquear, pero por seguridad:
   if (!session || !session.user) {

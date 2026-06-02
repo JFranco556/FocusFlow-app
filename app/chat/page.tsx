@@ -1,4 +1,5 @@
 import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import connectToDatabase from "@/lib/mongodb";
 import { ChatMessage } from "@/lib/models/ChatMessage";
@@ -6,7 +7,7 @@ import { ChatMessage } from "@/lib/models/ChatMessage";
 import ChatClientApp from "./ChatClientApp";
 
 export default async function ChatPage() {
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
   
   if (!session || !session.user) {
     redirect("/login");

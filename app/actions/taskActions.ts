@@ -7,11 +7,11 @@ import { revalidatePath } from "next/cache";
 /**
  * Obtener todas las tareas de la base de datos
  */
-export async function getTasks() {
+export async function getTasks(userId: string) {
   try {
     await connectToDatabase();
     // Fetch all tasks, sorted by urgency and then by creation date
-    const tasks = await Task.find({}).sort({ isUrgent: -1, createdAt: -1 }).lean();
+    const tasks = await Task.find({ userId }).sort({ isUrgent: -1, createdAt: -1 }).lean();
     
     // We need to stringify IDs because plain objects are required in Server Components
     return JSON.parse(JSON.stringify(tasks));
@@ -31,6 +31,8 @@ export async function toggleTaskCompletion(taskId: string, isCompleted: boolean)
     
     // Revalidate the dashboard page so it shows the new state
     revalidatePath("/");
+    revalidatePath("/tasks");
+    revalidatePath("/schedule");
     return { success: true };
   } catch (error) {
     console.error("Error toggling task:", error);
@@ -41,20 +43,22 @@ export async function toggleTaskCompletion(taskId: string, isCompleted: boolean)
 /**
  * Crear una nueva tarea de prueba (Seed)
  */
-export async function createTestTasks() {
+export async function createTestTasks(userId: string) {
   try {
     await connectToDatabase();
     
-    const count = await Task.countDocuments();
+    const count = await Task.countDocuments({ userId });
     if (count === 0) {
       await Task.create([
         {
+          userId,
           title: "Revisión de Presupuesto Q3",
           description: "Aprobar las partidas finales con el equipo de finanzas antes de la junta directiva.",
           isUrgent: true,
           dueDate: new Date(new Date().setHours(10, 0, 0, 0)),
         },
         {
+          userId,
           title: "Feedback Diseño UI",
           description: "Enviar comentarios sobre los nuevos componentes compartidos al equipo de desarrollo.",
           isUrgent: false,
