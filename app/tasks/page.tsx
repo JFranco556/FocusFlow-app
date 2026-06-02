@@ -4,8 +4,10 @@ import { redirect } from "next/navigation";
 import connectToDatabase from "@/lib/mongodb";
 import { Task } from "@/lib/models/Task";
 import TaskCard from "@/components/TaskCard";
+import FloatingActionButton from "@/components/FloatingActionButton";
+import Link from "next/link";
 
-export default async function TasksPage() {
+export default async function TasksPage({ searchParams }: { searchParams: { filter?: string } }) {
   const session = await getServerSession(authOptions);
   
   if (!session || !session.user) {
@@ -19,19 +21,28 @@ export default async function TasksPage() {
   const tasksRaw = await Task.find({ userId }).sort({ createdAt: -1 }).lean();
   const tasks = JSON.parse(JSON.stringify(tasksRaw));
 
-  const pendingTasks = tasks.filter((t: any) => !t.isCompleted);
+  const pendingTasksRaw = tasks.filter((t: any) => !t.isCompleted);
   const completedTasks = tasks.filter((t: any) => t.isCompleted);
+  
+  const isUrgentFilter = searchParams.filter === 'urgent';
+  const pendingTasks = isUrgentFilter 
+    ? pendingTasksRaw.filter((t: any) => t.isUrgent)
+    : pendingTasksRaw;
 
   return (
     <main className="flex-1 flex flex-col w-full max-w-[768px] mx-auto md:px-margin-mobile pt-lg pb-[100px] space-y-xl">
       <section className="px-margin-mobile md:px-0 flex justify-between items-end">
         <div>
           <h2 className="font-display-lg text-display-lg text-on-surface">Mis Tareas</h2>
-          <p className="font-body-lg text-on-surface-variant">Tienes {pendingTasks.length} tareas pendientes.</p>
+          <p className="font-body-lg text-on-surface-variant">Tienes {pendingTasksRaw.length} tareas pendientes.</p>
         </div>
-        <button className="flex items-center gap-1 text-secondary font-label-md hover:opacity-80 transition-opacity">
-          <span className="material-symbols-outlined text-[18px]">filter_list</span> Filtrar
-        </button>
+        <Link 
+          href={isUrgentFilter ? "/tasks" : "/tasks?filter=urgent"}
+          className={`flex items-center gap-1 font-label-md transition-opacity ${isUrgentFilter ? 'text-urgent-red' : 'text-secondary hover:opacity-80'}`}
+        >
+          <span className="material-symbols-outlined text-[18px]">filter_list</span> 
+          {isUrgentFilter ? "Ver Todas" : "Solo Urgentes"}
+        </Link>
       </section>
 
       {/* Tareas Pendientes */}
@@ -83,10 +94,7 @@ export default async function TasksPage() {
         </div>
       </section>
 
-      {/* Floating Action Button */}
-      <button className="fixed bottom-[80px] right-margin-mobile w-14 h-14 bg-secondary text-on-secondary rounded-2xl shadow-lg flex items-center justify-center hover:opacity-90 transition-opacity active:scale-90 z-50">
-        <span className="material-symbols-outlined text-[28px]">add</span>
-      </button>
+      <FloatingActionButton userId={userId} />
     </main>
   );
 }

@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
 import { Providers } from "./providers";
+import BottomNavBar from "@/components/BottomNavBar";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
@@ -39,35 +40,20 @@ export default function RootLayout({
                 </div>
                 <h1 className="font-headline-md-mobile text-headline-md-mobile font-bold text-on-surface">FocusFlow</h1>
               </div>
-              <button className="w-10 h-10 rounded-full flex items-center justify-center bg-surface-variant text-on-surface-variant hover:opacity-80 transition-opacity active:scale-95 transition-transform">
+              <button 
+                className="w-10 h-10 rounded-full flex items-center justify-center bg-surface-variant text-on-surface-variant hover:opacity-80 transition-opacity active:scale-95 relative"
+              >
                 <span className="material-symbols-outlined">notifications</span>
+                {/* Red dot indicator */}
+                <span className="absolute top-2 right-2 w-2 h-2 bg-urgent-red rounded-full"></span>
               </button>
             </div>
           </header>
 
           {children}
 
-          {/* BottomNavBar */}
-          <nav className="fixed bottom-0 w-full h-[56px] z-50 bg-surface shadow-[0px_-2px_8px_rgba(0,0,0,0.05)]">
-            <div className="flex justify-around items-center w-full max-w-[768px] mx-auto px-margin-mobile h-full">
-              <Link href="/" className="flex flex-col items-center justify-center text-secondary relative hover:opacity-80 transition-opacity active:scale-90 transition-transform">
-                <span className="material-symbols-outlined" data-weight="fill">dashboard</span>
-                <span className="font-label-sm text-label-sm mt-1">Dashboard</span>
-              </Link>
-              <Link href="/tasks" className="flex flex-col items-center justify-center text-on-surface-variant hover:text-secondary transition-colors active:scale-90 transition-transform">
-                <span className="material-symbols-outlined">checklist</span>
-                <span className="font-label-sm text-label-sm mt-1">Tareas</span>
-              </Link>
-              <Link href="/schedule" className="flex flex-col items-center justify-center text-on-surface-variant hover:text-secondary transition-colors active:scale-90 transition-transform">
-                <span className="material-symbols-outlined">calendar_month</span>
-                <span className="font-label-sm text-label-sm mt-1">Horario</span>
-              </Link>
-              <Link href="/chat" className="flex flex-col items-center justify-center text-on-surface-variant hover:text-secondary transition-colors active:scale-90 transition-transform">
-                <span className="material-symbols-outlined">smart_toy</span>
-                <span className="font-label-sm text-label-sm mt-1">Chat</span>
-              </Link>
-            </div>
-          </nav>
+          {/* BottomNavBar interactivo */}
+          <BottomNavBar />
         </Providers>
       </body>
     </html>

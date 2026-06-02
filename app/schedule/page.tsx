@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import connectToDatabase from "@/lib/mongodb";
 import { Task } from "@/lib/models/Task";
 import { ScheduleItem } from "@/lib/models/ScheduleItem";
+import FloatingActionButton from "@/components/FloatingActionButton";
 
 export default async function SchedulePage() {
   const session = await getServerSession(authOptions);
@@ -84,10 +85,7 @@ export default async function SchedulePage() {
         </div>
       </section>
 
-      {/* Floating Action Button */}
-      <button className="fixed bottom-[80px] right-margin-mobile w-14 h-14 bg-secondary text-on-secondary rounded-2xl shadow-lg flex items-center justify-center hover:opacity-90 transition-opacity active:scale-90 z-50">
-        <span className="material-symbols-outlined text-[28px]">add</span>
-      </button>
+      <FloatingActionButton userId={userId} />
     </main>
   );
 }
