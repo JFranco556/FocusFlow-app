@@ -8,7 +8,8 @@ export async function createScheduleItem(userId: string, data: {
   title: string, 
   startTime: string, 
   endTime: string, 
-  dayOfWeek: number 
+  dayOfWeek: number,
+  color?: string
 }) {
   try {
     await connectToDatabase();
@@ -18,6 +19,7 @@ export async function createScheduleItem(userId: string, data: {
       startTime: data.startTime,
       endTime: data.endTime,
       dayOfWeek: data.dayOfWeek,
+      color: data.color || "default",
       category: "Class"
     });
     

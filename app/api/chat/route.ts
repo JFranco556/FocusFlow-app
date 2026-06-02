@@ -5,7 +5,7 @@ import { authOptions } from "@/lib/auth";
 import connectToDatabase from "@/lib/mongodb";
 import { ChatMessage } from "@/lib/models/ChatMessage";
 
-const ai = new GoogleGenAI({});
+const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || "" });
 
 export async function POST(req: Request) {
   try {
@@ -31,9 +31,15 @@ export async function POST(req: Request) {
       content: lastMessage.content
     });
 
+    // Formatear historial para Gemini
+    const contents = messages.map((m: any) => ({
+      role: m.role === "user" ? "user" : "model",
+      parts: [{ text: m.content }]
+    }));
+
     const response = await ai.models.generateContent({
         model: 'gemini-2.5-flash',
-        contents: lastMessage.content || lastMessage.text || JSON.stringify(lastMessage),
+        contents: contents,
         config: {
           systemInstruction: "Eres FlowAI, un asistente académico inteligente y motivador. Ayudas al usuario a gestionar su tiempo, priorizar tareas y mantenerse enfocado.",
         }

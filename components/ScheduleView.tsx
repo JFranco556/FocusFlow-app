@@ -23,6 +23,15 @@ function dateToPixels(date: Date | string) {
   return (d.getHours() * 60) + d.getMinutes();
 }
 
+const COLOR_MAP: Record<string, string> = {
+  blue: "bg-blue-500/20 border-blue-500 text-blue-400",
+  red: "bg-red-500/20 border-red-500 text-red-400",
+  green: "bg-green-500/20 border-green-500 text-green-400",
+  purple: "bg-purple-500/20 border-purple-500 text-purple-400",
+  orange: "bg-orange-500/20 border-orange-500 text-orange-400",
+  default: "bg-tertiary-container/90 border-tertiary text-tertiary",
+};
+
 export default function ScheduleView({ userId, scheduleItems, tasks }: ScheduleViewProps) {
   const [viewMode, setViewMode] = useState<ViewMode>("weekly");
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -139,14 +148,15 @@ export default function ScheduleView({ userId, scheduleItems, tasks }: ScheduleV
               {dayBlocks.map(block => {
                 const top = timeToPixels(block.startTime);
                 const height = timeToPixels(block.endTime) - top;
+                const colorClasses = COLOR_MAP[block.color] || COLOR_MAP.default;
                 return (
                   <div 
                     key={block._id}
-                    className="absolute left-1 right-1 bg-tertiary-container/90 border border-tertiary rounded p-1 overflow-hidden hover:opacity-100 opacity-90 transition-opacity cursor-pointer z-10 shadow-sm"
+                    className={`absolute left-1 right-1 border rounded p-1 overflow-hidden hover:opacity-100 opacity-90 transition-opacity cursor-pointer z-10 shadow-sm ${colorClasses}`}
                     style={{ top: `${top}px`, height: `${height}px` }}
                   >
-                    <div className="font-label-sm font-semibold text-tertiary truncate leading-tight">{block.title}</div>
-                    <div className="text-[10px] text-on-surface-variant truncate">{block.startTime}</div>
+                    <div className="font-label-sm font-semibold truncate leading-tight">{block.title}</div>
+                    <div className="text-[10px] opacity-80 truncate">{block.startTime}</div>
                   </div>
                 );
               })}
@@ -202,10 +212,11 @@ export default function ScheduleView({ userId, scheduleItems, tasks }: ScheduleV
           {dayBlocks.map(block => {
             const top = timeToPixels(block.startTime);
             const height = timeToPixels(block.endTime) - top;
+            const colorClasses = COLOR_MAP[block.color] || COLOR_MAP.default;
             return (
-              <div key={block._id} className="absolute left-2 right-4 bg-tertiary-container/90 border border-tertiary rounded-lg p-2 hover:opacity-100 opacity-90 transition-opacity shadow-sm z-10" style={{ top: `${top}px`, height: `${height}px` }}>
-                <div className="font-label-sm font-bold text-tertiary">{block.title}</div>
-                <div className="text-xs text-on-surface-variant">{block.startTime} - {block.endTime}</div>
+              <div key={block._id} className={`absolute left-2 right-4 border rounded-lg p-2 hover:opacity-100 opacity-90 transition-opacity shadow-sm z-10 ${colorClasses}`} style={{ top: `${top}px`, height: `${height}px` }}>
+                <div className="font-label-sm font-bold">{block.title}</div>
+                <div className="text-xs opacity-80">{block.startTime} - {block.endTime}</div>
               </div>
             );
           })}

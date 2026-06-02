@@ -7,6 +7,7 @@ export interface IScheduleItem extends Document {
   startTime: string; // HH:mm format
   endTime: string;   // HH:mm format
   dayOfWeek: number; // 0 = Sunday, 1 = Monday, etc.
+  color?: string; // color name
   description?: string;
   createdAt: Date;
   updatedAt: Date;
@@ -20,6 +21,7 @@ const ScheduleItemSchema: Schema = new Schema(
     startTime: { type: String, required: true },
     endTime: { type: String, required: true },
     dayOfWeek: { type: Number, required: true, min: 0, max: 6 },
+    color: { type: String, default: "default" },
     description: { type: String },
   },
   {

@@ -12,8 +12,8 @@ export default function AddScheduleModal({ userId, onClose }: Props) {
   const [title, setTitle] = useState("");
   const [startTime, setStartTime] = useState("09:00");
   const [endTime, setEndTime] = useState("11:00");
-  // Por defecto el día de hoy
   const [dayOfWeek, setDayOfWeek] = useState(new Date().getDay());
+  const [color, setColor] = useState("default");
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -26,6 +26,7 @@ export default function AddScheduleModal({ userId, onClose }: Props) {
       startTime,
       endTime,
       dayOfWeek: Number(dayOfWeek),
+      color,
     });
     setIsLoading(false);
     onClose();
@@ -91,6 +92,29 @@ export default function AddScheduleModal({ userId, onClose }: Props) {
                 onChange={(e) => setEndTime(e.target.value)}
                 className="w-full bg-surface-container border border-outline-variant/30 rounded-lg px-4 py-2 text-body-md focus:outline-none focus:border-tertiary"
               />
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-label-md font-medium text-on-surface-variant mb-2">Color</label>
+            <div className="flex gap-3">
+              {[
+                { id: "default", bg: "bg-[#25324d]" },
+                { id: "blue", bg: "bg-blue-500" },
+                { id: "red", bg: "bg-red-500" },
+                { id: "green", bg: "bg-green-500" },
+                { id: "purple", bg: "bg-purple-500" },
+                { id: "orange", bg: "bg-orange-500" },
+              ].map(c => (
+                <button
+                  key={c.id}
+                  type="button"
+                  onClick={() => setColor(c.id)}
+                  className={`w-8 h-8 rounded-full ${c.bg} flex items-center justify-center transition-transform ${color === c.id ? 'scale-110 ring-2 ring-secondary ring-offset-2 ring-offset-surface' : 'opacity-80 hover:opacity-100'}`}
+                >
+                  {color === c.id && <span className="material-symbols-outlined text-white text-[16px]">check</span>}
+                </button>
+              ))}
             </div>
           </div>
 
