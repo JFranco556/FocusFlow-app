@@ -94,7 +94,7 @@ export default async function TasksPage({ searchParams }: { searchParams: { filt
         </div>
       </section>
 
-      <FloatingActionButton userId={userId} />
+      <FloatingActionButton userId={userId} type="task" />
     </main>
   );
 }

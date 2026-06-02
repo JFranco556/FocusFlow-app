@@ -2,12 +2,14 @@
 
 import { useState } from "react";
 import AddTaskModal from "./AddTaskModal";
+import AddScheduleModal from "./AddScheduleModal";
 
 interface Props {
   userId: string;
+  type?: "task" | "schedule";
 }
 
-export default function FloatingActionButton({ userId }: Props) {
+export default function FloatingActionButton({ userId, type = "task" }: Props) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -19,8 +21,11 @@ export default function FloatingActionButton({ userId }: Props) {
         <span className="material-symbols-outlined text-[28px]">add</span>
       </button>
 
-      {isOpen && (
+      {isOpen && type === "task" && (
         <AddTaskModal userId={userId} onClose={() => setIsOpen(false)} />
+      )}
+      {isOpen && type === "schedule" && (
+        <AddScheduleModal userId={userId} onClose={() => setIsOpen(false)} />
       )}
     </>
   );
